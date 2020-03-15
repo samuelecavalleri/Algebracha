@@ -4,16 +4,15 @@ class Matrix:
         try:
             self.matrix = self._createMatrix(rows)
         except ValueError:
-            print('Invalid numbers or format')
-            raise
+            raise 'Invalid numbers or format'
 
     def _createMatrix(self, rows):
         matrix = []
 
-        for row in rows.split(','): 
+        for row in rows.split(','):
             newRow = []
-            
-            for i in row.strip().split(' '): 
+
+            for i in row.strip().split(' '):
                 newRow.append(float(i.strip()))
 
             matrix.append(newRow)
@@ -42,5 +41,24 @@ class Matrix:
 
         return True
 
+    # returns true if this matrix is equal to the one passed as argument
 
+    def equals(self, matrix) -> bool:
+        return matrix.toList() == self.matrix
 
+    # returns a new transposed matrix
+
+    def transpose(self) -> list:
+        if not self.isSquare():
+            raise Exception('Matrix is not square')
+
+        size = len(self.matrix)
+
+        transposed = [[0 for i in range(0, size)] for j in range(0, size)]
+
+        for i in range(0, size):
+            for j in range(0, size):
+                transposed[i][j] = self.matrix[j][i]
+                print(i, j, transposed)
+
+        self.matrix = transposed

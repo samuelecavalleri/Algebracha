@@ -29,7 +29,7 @@ A simple Python library adding support for basic Linear Algebra and Analytic Geo
 
 ## Methods
 ```
-matrix = Matrix(1 0, 0 1)
+matrix = Matrix('1 0, 0 1')
 ```
 
 ### Check if the matrix is square (bool)
@@ -37,5 +37,14 @@ matrix = Matrix(1 0, 0 1)
 
 ### Check if the matrix is diagonal (bool)
 `matrix.isDiagonal()`
+
+### Check if matrix is equal to another matrix (bool)
+```
+otherMatrix = Matrix('1 2, 3 4')
+matrix.equals(otherMatrix)
+```
+
+### Transpose matrix (None)
+`matrix.transpose()`
 
 
