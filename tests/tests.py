@@ -12,7 +12,7 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(expected, matrix.toList())
 
-    def test_square(self):
+    def test_diagonal(self):
         m = '''
             1 0 0,
             0 1 0,
@@ -21,6 +21,18 @@ class TestMatrix(unittest.TestCase):
         matrix = Matrix(m)
 
         self.assertTrue(matrix.isSquare())
+
+        self.assertTrue(matrix.isDiagonal())
+
+    def test_not_diagonal(self):
+        m = '''
+            1 0 0,
+            1 1 0,
+            0 0 1
+        '''
+        matrix = Matrix(m)
+
+        self.assertFalse(matrix.isDiagonal())
 
 if __name__ == '__main__':
     unittest.main()

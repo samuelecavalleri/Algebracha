@@ -1,5 +1,3 @@
-from .utils import printMatrix
-
 class Matrix:
 
     def __init__(self, rows: str):
@@ -30,5 +28,19 @@ class Matrix:
     # returns True if the matrix is square
     def isSquare(self) -> bool:
         return len(self.matrix) == len(self.matrix[0])
+
+    # returns True if the matrix is diagonal
+    def isDiagonal(self) -> bool:
+        if not self.isSquare():
+            return False
+
+        size = len(self.matrix)
+        for i in range(0, size):
+            for j in range(0, size):
+                if (i != j and self.matrix[i][j] != 0):
+                    return False
+
+        return True
+
 
 

@@ -6,7 +6,7 @@ A simple Python library adding support for basic Linear Algebra and Analytic Geo
   ```
   from algebracha import Matrix
   
-  matrix = new Matrix('1 2 3, 4 5 6')
+  matrix = Matrix('1 2 3, 4 5 6')
   ```
   Matrix's constructor requires one string argument that defines the actual matrix: <br>
   EG: to create the following matrix:
@@ -26,3 +26,16 @@ A simple Python library adding support for basic Linear Algebra and Analytic Geo
     5 6 7 8
   '''
   ``` 
+
+## Methods
+```
+matrix = Matrix(1 0, 0 1)
+```
+
+### Check if the matrix is square (bool)
+`matrix.isSquare()` 
+
+### Check if the matrix is diagonal (bool)
+`matrix.isDiagonal()`
+
+
