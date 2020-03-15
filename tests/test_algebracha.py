@@ -51,5 +51,20 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(expected, matrix.toList())
 
+    def test_sum(self):
+        matrix1 = Matrix('1 2, 3 4, 5 6')
+        matrix2 = Matrix('1 1, 2 2, 3 3')
+
+        matrix1.sum(matrix2)
+
+        expected = [
+            [2, 3],
+            [5, 6],
+            [8, 9]
+        ]
+
+        self.assertEqual(expected, matrix1.toList())
+
+
 if __name__ == '__main__':
     unittest.main()

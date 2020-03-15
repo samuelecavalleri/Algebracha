@@ -47,4 +47,10 @@ matrix.equals(otherMatrix)
 ### Transpose matrix (None)
 `matrix.transpose()`
 
+### Sum matrices (None)
+```
+otherMatrix = Matrix('1 2, 3 4')
+matrix.sum(otherMatrix)
+```
+
 

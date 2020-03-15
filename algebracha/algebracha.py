@@ -42,13 +42,11 @@ class Matrix:
         return True
 
     # returns true if this matrix is equal to the one passed as argument
-
     def equals(self, matrix) -> bool:
         return matrix.toList() == self.matrix
 
-    # returns a new transposed matrix
-
-    def transpose(self) -> list:
+    # transpose the matrix
+    def transpose(self) -> None:
         if not self.isSquare():
             raise Exception('Matrix is not square')
 
@@ -62,3 +60,14 @@ class Matrix:
                 print(i, j, transposed)
 
         self.matrix = transposed
+
+    # sum with the matrix passed as argument
+    def sum(self, matrix) -> None:
+        matrix = matrix.toList()
+
+        if len(matrix) != len(self.matrix) and len(matrix[0]) != len(self.matrix[0]):
+            raise Exception('Matrices must have the same dimensions')
+
+        for i in range(0, len(self.matrix)):
+            for j in range(0, len(self.matrix[0])):
+                self.matrix[i][j] += matrix[i][j]
