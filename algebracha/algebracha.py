@@ -96,3 +96,45 @@ class Matrix:
 
         self.matrix = result
         
+    # compute the determinant
+    def determinant(self) -> float:
+        if not self.isSquare():
+            raise Exception('Matrix must be square')
+
+        return self._determinant(self.matrix)
+
+    def _determinant(self, matrix):
+        if len(matrix) == 2:
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+
+        size = len(matrix)
+
+        determinant = 0
+
+        for i in range(0, size):
+            sign = 1 if (i + 1) % 2 != 0 else -1
+            subMatrix = self._subMatrix(matrix, 0, i)
+            determinant += matrix[0][i] * self._determinant(subMatrix) * sign
+
+        print(determinant)
+        return determinant
+
+    def _subMatrix(self, matrix, row, col):
+        size = len(matrix)
+
+        subMatrix = []
+
+        for i in range(0, size):
+            if i != row:
+                newRow = []
+                
+                for j in range(0, size):
+                    if j != col:
+                        newRow.append(matrix[i][j])
+
+                subMatrix.append(newRow)
+
+        return subMatrix
+
+
+
