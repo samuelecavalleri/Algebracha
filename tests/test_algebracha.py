@@ -65,6 +65,19 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(expected, matrix1.toList())
 
+    def test_multiply(self):
+        matrix1 = Matrix('4 2, 3 2')
+        matrix2 = Matrix('3 2 -4, 5 0 2')
+
+        expected = [
+            [22, 8, -12],
+            [19, 6, -8]
+        ]
+
+        matrix1.multiply(matrix2)
+
+        self.assertEqual(expected, matrix1.toList())
+
 
 if __name__ == '__main__':
     unittest.main()
