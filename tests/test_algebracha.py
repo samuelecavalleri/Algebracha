@@ -110,6 +110,69 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(expected, matrix.toList())
 
+    def test_sum_rows(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.sumRows(1, 2)
+        expected = [
+            [5, 7, 9],
+            [4, 5, 6],
+            [7, 8, 9]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+        matrix.sumRows(3, 2, 3)
+        expected = [
+            [5, 7, 9],
+            [4, 5, 6],
+            [33, 39, 45]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+    def test_sum_columns(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.sumColumns(1, 2)
+        expected = [
+            [3, 2, 3],
+            [9, 5, 6],
+            [15, 8, 9]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+        matrix.sumColumns(3, 2, 3)
+        expected = [
+            [3, 2, 15],
+            [9, 5, 33],
+            [15, 8, 51]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+    def test_multiply_row(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.multiplyRow(1, 5)
+
+        expected = [5, 10, 15]
+
+        self.assertEqual(expected, matrix.toList()[0])
+
+    def test_multiply_column(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.multiplyColumn(1, 5)
+
+        expected = [
+            [5, 2, 3],
+            [20, 5, 6],
+            [35, 8, 9]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
 
 if __name__ == '__main__':
     unittest.main()

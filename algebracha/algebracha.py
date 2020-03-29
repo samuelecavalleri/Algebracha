@@ -149,3 +149,38 @@ class Matrix:
 
         for i in range(0, len(self.matrix)):
             self.matrix[i][col1], self.matrix[i][col2] = self.matrix[i][col2], self.matrix[i][col1]
+
+    #sum rows
+    def sumRows(self, row1, row2, multiplier = 1):
+        row1 -= 1
+        row2 -= 1
+
+        row = []
+
+        for i in range(0, len(self.matrix[0])):
+            row.append((self.matrix[row1][i] + self.matrix[row2][i]) * multiplier)
+
+        self.matrix[row1] = row
+
+    #sum columns
+    def sumColumns(self, col1, col2, multiplier = 1):
+        col1 -= 1
+        col2 -= 1
+
+        for i in range(0, len(self.matrix)):
+            self.matrix[i][col1] = (self.matrix[i][col1] + self.matrix[i][col2]) * multiplier
+
+    #multiply row by scalar
+    def multiplyRow(self, row, scalar):
+        row -= 1
+
+        for i in range(0, len(self.matrix[row])):
+            self.matrix[row][i] *= scalar
+
+    #multiply column by scalar
+    def multiplyColumn(self, column, scalar):
+        column -= 1
+
+        for i in range(0, len(self.matrix)):
+            self.matrix[i][column] *= scalar
+    
