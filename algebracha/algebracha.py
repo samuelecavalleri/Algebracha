@@ -136,5 +136,16 @@ class Matrix:
 
         return subMatrix
 
+    # swap two rows
+    def swapRows(self, row1, row2):
+        row1 -= 1
+        row2 -= 1
+        self.matrix[row1], self.matrix[row2] = self.matrix[row2], self.matrix[row1]
 
+    # swap two columns
+    def swapColumns(self, col1, col2):
+        col1 -= 1
+        col2 -= 1
 
+        for i in range(0, len(self.matrix)):
+            self.matrix[i][col1], self.matrix[i][col2] = self.matrix[i][col2], self.matrix[i][col1]

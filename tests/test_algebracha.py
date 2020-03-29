@@ -84,5 +84,32 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(determinant, matrix.determinant())
 
+    def test_swap_rows(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.swapRows(1, 3)
+
+        expected = [
+            [7, 8, 9],
+            [4, 5, 6],
+            [1, 2, 3]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+    def test_swap_columns(self):
+        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
+
+        matrix.swapColumns(1, 2)
+
+        expected = [
+            [2, 1, 3],
+            [5, 4, 6],
+            [8, 7, 9]
+        ]
+
+        self.assertEqual(expected, matrix.toList())
+
+
 if __name__ == '__main__':
     unittest.main()

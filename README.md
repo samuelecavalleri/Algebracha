@@ -32,8 +32,11 @@ A simple Python library adding support for basic Linear Algebra and Analytic Geo
 matrix = Matrix('1 0, 0 1')
 ```
 
-### Check if the matrix is square
+### Compute determinant
+###### Returns the determinant of the matrix
+`matrix.determinant()`
 
+### Check if the matrix is square
 ###### Returns True if the matrix is square, False otherwise
 `matrix.isSquare()` 
 
@@ -47,6 +50,8 @@ matrix = Matrix('1 0, 0 1')
 otherMatrix = Matrix('1 2, 3 4')
 matrix.equals(otherMatrix)
 ```
+
+# Operations
 
 ### Transpose matrix
 ###### Transposes the matrix
@@ -66,7 +71,15 @@ otherMatrix = Matrix('1 2, 3 4, 5 6, 7 8')
 matrix.sum(otherMatrix)
 ```
 
-### Compute determinant
-###### Returns the determinant of the matrix
-`matrix.determinant()`
 
+### Swap Rows
+###### Swap two rows
+```
+matrix.swapRows(1, 2) #row count starts at 1
+```
+
+### Swap Columns
+###### Swap two columns
+```
+matrix.swapColumns(1, 2) #column count starts at 1
+```
