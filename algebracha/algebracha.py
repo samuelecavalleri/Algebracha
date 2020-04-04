@@ -65,7 +65,6 @@ class Matrix:
         for i in range(0, size):
             for j in range(0, size):
                 transposed[i][j] = self.matrix[j][i]
-                print(i, j, transposed)
 
         self.matrix = transposed
 
@@ -116,7 +115,6 @@ class Matrix:
             subMatrix = self._subMatrix(matrix, 0, i)
             determinant += matrix[0][i] * self._determinant(subMatrix) * sign
 
-        print(determinant)
         return determinant
 
     def _subMatrix(self, matrix, row, col):
@@ -158,7 +156,7 @@ class Matrix:
         row = []
 
         for i in range(0, len(self.matrix[0])):
-            row.append((self.matrix[row1][i] + self.matrix[row2][i]) * multiplier)
+            row.append(self.matrix[row1][i] + (self.matrix[row2][i]) * multiplier)
 
         self.matrix[row1] = row
 
@@ -168,7 +166,7 @@ class Matrix:
         col2 -= 1
 
         for i in range(0, len(self.matrix)):
-            self.matrix[i][col1] = (self.matrix[i][col1] + self.matrix[i][col2]) * multiplier
+            self.matrix[i][col1] = self.matrix[i][col1] + (self.matrix[i][col2]) * multiplier
 
     #multiply row by scalar
     def multiplyRow(self, row, scalar):
@@ -183,4 +181,45 @@ class Matrix:
 
         for i in range(0, len(self.matrix)):
             self.matrix[i][column] *= scalar
-    
+
+    #transforsm the matrix to its echelon form using Gaussian Elimination
+    def transformEchelon(self):
+        #move row with the largest leftmost number on top
+        for i in range(0, len(self.matrix)):
+            if self.matrix[i][0] > self.matrix[0][0]:
+                self.matrix.insert(0, self.matrix.pop(i))
+
+        for row in range(1, len(self.matrix) + 1):
+            #make first element of the row become 1
+            first = self.matrix[row-1][row-1]
+            if first != 0:
+                self.multiplyRow(row, 1 / first)
+            
+            #make first element of other rows become 0
+            for nextRow in range(row + 1, len(self.matrix) + 1):
+                self.sumRows(nextRow, row, self.matrix[nextRow-1][row-1] * -1)
+
+    #compute the rank
+    def rank(self)->int:
+        if self.isSquare() and self.determinant() != 0:
+            return min(len(self.matrix), len(self.matrix[0]))
+
+        #save original matrix state and transform matrix to its echelon form
+        oldForm = self.matrix
+        self.transformEchelon()
+
+        #count non-zero rows
+        rank = 0
+        for row in self.matrix:
+            nonZero = True
+            for i in row:
+                if i != 0:
+                    nonZero = False
+
+            if not nonZero:
+                rank += 1
+
+        #restore matrix to previous state
+        self.matrix = oldForm
+
+        return rank

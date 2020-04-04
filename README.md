@@ -109,3 +109,15 @@ matrix.multiplyRow(1, 3)
 ```
 matrix.multiplyColumn(2, 4)
 ```
+
+### Compute rank of the matrix
+###### Get the max number of linarly independent rows or columns
+```
+matrix.rank()
+```
+
+### Transform matrix to its echelon form
+###### Transform to echelon form using Gaussian Elimination
+```
+matrix.transformEchelon()
+'''

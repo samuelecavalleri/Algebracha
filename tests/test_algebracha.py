@@ -1,5 +1,6 @@
 import unittest
 from algebracha.algebracha import Matrix
+import math
 
 
 class TestMatrix(unittest.TestCase):
@@ -126,7 +127,7 @@ class TestMatrix(unittest.TestCase):
         expected = [
             [5, 7, 9],
             [4, 5, 6],
-            [33, 39, 45]
+            [19, 23, 27]
         ]
 
         self.assertEqual(expected, matrix.toList())
@@ -143,11 +144,11 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(expected, matrix.toList())
 
-        matrix.sumColumns(3, 2, 3)
+        matrix.sumColumns(3, 2, 2)
         expected = [
-            [3, 2, 15],
-            [9, 5, 33],
-            [15, 8, 51]
+            [3, 2, 7],
+            [9, 5, 16],
+            [15, 8, 25]
         ]
 
         self.assertEqual(expected, matrix.toList())
@@ -173,6 +174,44 @@ class TestMatrix(unittest.TestCase):
         ]
 
         self.assertEqual(expected, matrix.toList())
+
+    def test_echelon(self):
+        matrix = Matrix('''
+            1 2 3, 
+            3 6 9, 
+            4 0 4
+        ''')
+
+        matrix.transformEchelon()
+
+        expected = [
+            [1, 0, 1],
+            [0, 1, 1],
+            [0, 0, 0]
+        ]
+
+        testPassed = True
+
+        matrix = matrix.toList()
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[i])):
+                if not math.isclose(matrix[i][j], expected[i][j], rel_tol=1e-9):
+                    testPassed = False
+
+        self.assertTrue(testPassed)
+
+    def test_rank(self):
+
+        matrix = Matrix('''
+            1 2 3,
+            3 6 9,
+            4 0 4
+        ''')
+
+        rank = 2
+
+        self.assertEqual(rank, matrix.rank())
+
 
 if __name__ == '__main__':
     unittest.main()
