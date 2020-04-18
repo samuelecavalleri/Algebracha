@@ -80,10 +80,17 @@ class TestMatrix(unittest.TestCase):
         self.assertEqual(expected, matrix1.toList())
 
     def test_determinant(self):
-        matrix = Matrix('1 2 3, 4 5 6, 7 8 9')
-        determinant = 0
+        matrix1 = Matrix('1 2 3, 4 5 6, 7 8 9')
 
-        self.assertEqual(determinant, matrix.determinant())
+        matrix2 = Matrix('''
+            1 2 3 4 5,
+            6 7 8 9 0,
+            7 8 9 6 4,
+            0 7 1 1 0,
+            9 7 8 2 9
+        ''')
+        self.assertEqual(0, matrix1.determinant())
+        self.assertEqual(3455, matrix2.determinant())
 
     def test_swap_rows(self):
         matrix = Matrix('1 2 3, 4 5 6, 7 8 9')

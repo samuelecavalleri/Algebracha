@@ -1,5 +1,5 @@
 # Algebracha 🌶
-A simple Python library adding support for basic Linear Algebra and Analytic Geometry operations
+A Python library adding support for basic Linear Algebra and Analytic Geometry operations
 
 ## Creating a new matrix object
 
@@ -29,7 +29,7 @@ A simple Python library adding support for basic Linear Algebra and Analytic Geo
 ---
 ## Methods
 ```
-matrix = Matrix('1 0, 0 1')
+matrix = Matrix('1 2 3, 4 5 6, 7 8 9)
 ```
 
 ### Compute determinant
