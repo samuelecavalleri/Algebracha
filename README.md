@@ -120,4 +120,30 @@ matrix.rank()
 ###### Transform to echelon form using Gaussian Elimination
 ```
 matrix.transformEchelon()
-'''
+```
+
+### Solve linear system
+###### Compute the solutions of the linear system associated to the matrix
+##### Example:
+$$
+\begin{cases} 3-5y+z=0\\\\3x+6y-5z=1\\\\2x-7y+4z=4 \end{cases}
+$$
+to matrix form:
+| 3 | -5 | 1 | 0 |
+|---|---|---|---|
+| 3 | 6 | -5 | 1 |
+| 2 | -7 | 4 | 4 |
+```
+matrix = Matrix('''
+  3 -5 1 0,
+  3 6 -5 1,
+  2 -7 4 4
+''')
+```
+```
+matrix.solveSystem()
+```
+returns array of solutions: [x, y, z]
+```
+[1.348, 0.515, 1.227]
+```

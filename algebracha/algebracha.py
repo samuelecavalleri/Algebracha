@@ -6,8 +6,6 @@ class Matrix:
         except ValueError:
             raise 'Invalid numbers or format'
 
-    # "PRIVATE" FUNCTIONS
-
     def _createMatrix(self, rows):
         matrix = []
 
@@ -24,9 +22,6 @@ class Matrix:
 
     def _sameSize(self, matrix) -> bool:
         return len(matrix) == len(self.matrix) and len(matrix[0]) == len(self.matrix[0])
-
-
-    # PUBLIC FUNCTIONS
 
     # returns the list object representing the matrix
     def toList(self) -> list:
@@ -184,9 +179,9 @@ class Matrix:
 
     #transforsm the matrix to its echelon form using Gaussian Elimination
     def transformEchelon(self):
-        #move row with the largest leftmost number on top
+        #move row with the smallest leftmost element on top
         for i in range(0, len(self.matrix)):
-            if self.matrix[i][0] > self.matrix[0][0]:
+            if self.matrix[i][0] < self.matrix[0][0]:
                 self.matrix.insert(0, self.matrix.pop(i))
 
         for row in range(1, len(self.matrix) + 1):
@@ -223,3 +218,38 @@ class Matrix:
         self.matrix = oldForm
 
         return rank
+
+    # compute the solutions of the matrix's linear system
+    def solveSystem(self)->list:
+        if len(self.matrix[0]) - len(self.matrix) != 1:
+            raise Exception('Matrix must be: number of columns = number of rows + 1')
+        
+        #save old state of matrix
+        matrix = self.matrix
+        self.transformEchelon()
+        
+        rows = len(self.matrix)
+        cols = len(self.matrix[0])
+
+        #create empty solutions array
+        solutions = [None for i in range(0, rows)]
+        
+        for i in range(rows - 1, -1, -1): #matrix from bottom to top
+            if i == rows - 1:
+                solutions[i] = self.matrix[i][cols - 1]
+            else:
+                solutionIndex = len(solutions) - 1
+                for j in range(cols - 2, cols - (cols - i), -1):
+                    self.matrix[i][cols - 1] -= self.matrix[i][j] * solutions[solutionIndex]
+                    solutionIndex -= 1
+
+            solutions[i] = self.matrix[i][cols - 1]
+
+        #restore previous matrix state
+        self.matrix = matrix
+
+        return solutions
+
+
+
+

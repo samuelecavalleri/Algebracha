@@ -184,17 +184,17 @@ class TestMatrix(unittest.TestCase):
 
     def test_echelon(self):
         matrix = Matrix('''
-            1 2 3, 
-            3 6 9, 
-            4 0 4
+            3 0 1, 
+            1 5 2, 
+            4 5 4
         ''')
 
         matrix.transformEchelon()
 
         expected = [
-            [1, 0, 1],
-            [0, 1, 1],
-            [0, 0, 0]
+            [1, 5, 2],
+            [0, 1, 1/3],
+            [0, 0, 1]
         ]
 
         testPassed = True
@@ -219,6 +219,25 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(rank, matrix.rank())
 
+    def test_solve_system(self):
+
+        # given the following linear system of equations
+        #   x -5y +z = 0
+        #   3x +6y -5z = 1
+        #   2x -7y +4z =  4
+
+        matrix = Matrix('''
+            1 -5 1 0,
+            3 6 -5 1,
+            2 -7 4 4 
+        ''')
+
+        x = 89/66
+        y = 17/33
+        z = 27/22
+
+        # print(matrix.solveSystem())
+        self.assertEqual([x, y, z], matrix.solveSystem())
 
 if __name__ == '__main__':
     unittest.main()
