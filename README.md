@@ -122,12 +122,10 @@ matrix.rank()
 matrix.transformEchelon()
 ```
 
-### Solve linear system
+### Solve system of linear equations
 ###### Compute the solutions of the linear system associated to the matrix
 ##### Example:
-$$
-\begin{cases} 3-5y+z=0\\\\3x+6y-5z=1\\\\2x-7y+4z=4 \end{cases}
-$$
+![Linar system](/images/linearSystem.png)
 to matrix form:
 | 3 | -5 | 1 | 0 |
 |---|---|---|---|
