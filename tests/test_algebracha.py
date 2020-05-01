@@ -239,5 +239,21 @@ class TestMatrix(unittest.TestCase):
         # print(matrix.solveSystem())
         self.assertEqual([x, y, z], matrix.solveSystem())
 
+    def test_inverse(self):
+        
+        matrix = Matrix('''
+            2 2 -2,
+            1 0 1,
+            0 1 1
+        ''')
+
+        inverted = [
+            [1/6, 2/3, -1/3],
+            [1/6, -1/3, 2/3],
+            [-1/6, 1/3, 1/3]
+        ]
+
+        self.assertEqual(inverted, matrix.getInverse())
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,3 +1,5 @@
+import copy
+
 class Matrix:
 
     def __init__(self, rows: str):
@@ -53,15 +55,20 @@ class Matrix:
         if not self.isSquare():
             raise Exception('Matrix is not square')
 
-        size = len(self.matrix)
+        transposed = self._transpose(self.matrix)
+
+        self.matrix = transposed
+
+    def _transpose(self, matrix):
+        size = len(matrix)
 
         transposed = [[0 for i in range(0, size)] for j in range(0, size)]
 
         for i in range(0, size):
             for j in range(0, size):
-                transposed[i][j] = self.matrix[j][i]
+                transposed[i][j] = matrix[j][i]
 
-        self.matrix = transposed
+        return transposed
 
     # sum with the matrix passed as argument
     def sum(self, matrix) -> None:
@@ -200,7 +207,7 @@ class Matrix:
             return min(len(self.matrix), len(self.matrix[0]))
 
         #save original matrix state and transform matrix to its echelon form
-        oldForm = self.matrix
+        oldForm = copy.deepcopy(self.matrix)
         self.transformEchelon()
 
         #count non-zero rows
@@ -225,7 +232,7 @@ class Matrix:
             raise Exception('Matrix must be: number of columns = number of rows + 1')
         
         #save old state of matrix
-        matrix = self.matrix
+        matrix = copy.deepcopy(self.matrix)
         self.transformEchelon()
         
         rows = len(self.matrix)
@@ -250,6 +257,31 @@ class Matrix:
 
         return solutions
 
+    def getInverse(self):
+        if not self.isSquare():
+            raise Exception('Matrix must be square')
+
+        determinant = self.determinant()
+        if determinant == 0:
+            raise Exception('Determinant is 0')
+        
+        n = len(self.matrix)
+
+        inverse = [[0 for i in range(0, n)] for i in range(0, n)]
+
+        for i in range(0, n):
+            for j in range(0, n):
+                # get submatrix
+                subMatrix = copy.deepcopy(self.matrix)
+                del(subMatrix[i])
+                for row in range(0, len(subMatrix)):
+                    del(subMatrix[row][j])
+                
+                subDet = self._determinant(subMatrix)
+
+                inverse[i][j] = (subDet / determinant) * ((-1) ** (i + j))
+
+        return self._transpose(inverse)
 
 
 

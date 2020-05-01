@@ -145,3 +145,9 @@ returns array of solutions: [x, y, z]
 ```
 [1.348, 0.515, 1.227]
 ```
+
+### Compute inverse matrix
+###### Returns the inverse matrix
+```
+matrix.getInverse()
+```
